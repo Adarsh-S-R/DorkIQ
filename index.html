@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DorkIQ</title>
+    <link rel="stylesheet" href="styles.css?v=4">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <span class="brand-text">DorkIQ</span>
+                </div>
+                <div class="nav-links">
+                    <a href="https://adarsh.triada.in" class="nav-link" target="_blank" rel="noopener noreferrer">Portfolio</a>
+                    <a href="https://github.com/Adarsh-S-R" class="nav-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main">
+            <div class="container">
+                <!-- Hero Section -->
+                <section class="hero">
+                    <div class="hero-content">
+                        <h1 class="hero-title">
+                            <span class="title-line">Intelligent Reconnaissance</span>
+                            <span class="title-accent">Made Simple</span>
+                        </h1>
+                        <p class="hero-description">
+                            Advanced vulnerability discovery platform using Google Dorks for security professionals.
+                        </p>
+                        <div class="hero-badges" style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+                            <a href="https://x.com/adarsh_sr_" target="_blank" rel="noopener noreferrer">
+                                <img alt="Follow on X" src="https://img.shields.io/badge/@adarsh_sr_-white?logo=x&logoColor=black">
+                            </a>
+                            <a href="https://www.linkedin.com/in/adarsh-sr/" target="_blank" rel="noopener noreferrer">
+                                <img alt="Connect on LinkedIn" src="https://img.shields.io/badge/LinkedIn-blue?logo=linkedin">
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Input Section -->
+                <section class="input-section">
+                        <div class="input-card">
+                            <form id="domainForm" class="domain-form">
+                                <div class="form-group">
+                                    <label for="domain" class="form-label">
+                                        <span class="label-text">Target Domain</span>
+                                        <span class="label-required">*</span>
+                                    </label>
+                                    <div class="input-wrapper">
+                                        <input
+                                            type="text"
+                                            id="domain"
+                                            name="domain"
+                                            placeholder="example.com"
+                                            required
+                                            class="form-input"
+                                            autocomplete="off"
+                                            spellcheck="false"
+                                        >
+
+                                        <div class="input-validation" id="domainValidation"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-options">
+                                    <label class="checkbox-wrapper">
+                                        <input
+                                            type="checkbox"
+                                            id="subdomains"
+                                            name="subdomains"
+                                            class="checkbox"
+                                        >
+                                        <span class="checkbox-custom"></span>
+                                        <span class="checkbox-label">Include subdomains</span>
+                                    </label>
+                                    <label class="checkbox-wrapper">
+                                        <input
+                                            type="checkbox"
+                                            id="advancedMode"
+                                            name="advancedMode"
+                                            class="checkbox"
+                                        >
+                                        <span class="checkbox-custom"></span>
+                                        <span class="checkbox-label">Advanced mode (more dorks)</span>
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary" id="generateBtn">
+                                    <span class="btn-text">Generate Dorks</span>
+                                    <div class="btn-loading" style="display: none;">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section class="results-section" id="resultsSection" style="display: none;">
+
+                    <div class="results-header">
+                        <div class="results-info">
+                            <h2 class="results-title" id="resultsTitle">Generated Dorks</h2>
+                            <p class="results-count" id="resultsCount">0 dorks found</p>
+                        </div>
+                        <div class="results-actions">
+                            <div class="filter-group">
+                                <label for="intentFilter" class="filter-label">Filter by Intent</label>
+                                <select id="intentFilter" class="filter-select">
+                                    <option value="All">All Categories</option>
+                                    <option value="Directories & Indexing">Directories & Indexing</option>
+                                    <option value="Sensitive Files & Configs">Sensitive Files & Configs</option>
+                                    <option value="Credentials & Keys">Credentials & Keys</option>
+                                    <option value="Information Disclosure">Information Disclosure</option>
+                                    <option value="Admin Panels & Dashboards">Admin Panels & Dashboards</option>
+                                    <option value="Vulnerable Technologies">Vulnerable Technologies</option>
+                                    <option value="Backup & Old Versions">Backup & Old Versions</option>
+                                    <option value="Exposed Cameras / IoT">Exposed Cameras / IoT</option>
+                                    <option value="Code Repositories / Source">Code Repositories / Source</option>
+                                    <option value="Database Dumps">Database Dumps</option>
+                                    <option value="Login Pages / Panels">Login Pages / Panels</option>
+                                    <option value="Misc Exploitable Data">Misc Exploitable Data</option>
+                                </select>
+                            </div>
+                            
+                            
+                            <!-- Post-generation Vulnerability Dropdown -->
+                            <div class="filter-group">
+                                <label class="filter-label">Vulnerability Type</label>
+                                <div class="dropdown-wrapper">
+                                    <button type="button" class="dropdown-toggle" id="resultsVulnDropdown">
+                                        <span class="dropdown-text">All Types</span>
+                                        <span class="dropdown-icon">▼</span>
+                                    </button>
+                                    <div class="dropdown-menu" id="resultsVulnDropdownMenu">
+                                        <div class="dropdown-search">
+                                            <input type="text" placeholder="Search types..." class="dropdown-search-input" id="resultsDropdownSearch">
+                                        </div>
+                                        <div class="dropdown-content" id="resultsDropdownContent">
+                                            <!-- Populated dynamically with types and counts -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="export-group">
+                                <div class="download-dropdown-wrapper">
+                                    <button type="button" class="btn btn-secondary btn-sm download-dropdown-toggle" id="downloadDropdown">
+                                        <span class="btn-icon">📥</span>
+                                        <span class="btn-text">Download</span>
+                                        <span class="dropdown-icon">▼</span>
+                                    </button>
+                                    <div class="download-dropdown-menu" id="downloadDropdownMenu">
+                                        <button class="download-item" data-format="txt">
+                                            <span class="download-icon">📄</span>
+                                            <span class="download-text">TXT Format</span>
+                                        </button>
+                                        <button class="download-item" data-format="json">
+                                            <span class="download-icon">📋</span>
+                                            <span class="download-text">JSON Format</span>
+                                        </button>
+                                        <button class="download-item" data-format="csv">
+                                            <span class="download-icon">📈</span>
+                                            <span class="download-text">CSV Format</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="results-grid" id="resultsGrid">
+                        <!-- Results will be dynamically inserted here -->
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p class="footer-text">
+                    Built for the Security Community 
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js?v=4"></script>
+</body>
+</html>
