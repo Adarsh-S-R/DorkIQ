@@ -484,6 +484,19 @@ async def health_check():
     """Health check endpoint"""
     return {"status": "healthy", "message": "DorkIQ API is running"}
 
+# === HEAD Handlers for Uptime Monitors ===
+from fastapi import Response
+
+@app.head("/", include_in_schema=False)
+async def root_head():
+    return Response(status_code=200)
+
+@app.head("/api/health", include_in_schema=False)
+async def health_head():
+    return Response(status_code=200)
+
+
+
 # === Run server ===
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "8000"))
