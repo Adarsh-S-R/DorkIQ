@@ -2,6 +2,9 @@
 
 Generate focused Google dorks for a target domain. Handy for quick recon and triage.
 
+
+[Demo](https://youtu.be/Vp1wuMazskY?si=QKTTW9IDGzutstax) | [Live Tool](https://dorkiq.triada.in)
+
 ### What it does
 - Generates dorks across common vuln areas (SQLi, XSS, LFI/RFI, configs, backups, secrets, cloud, etc.)
 - Optional subdomain and advanced modes for broader coverage
